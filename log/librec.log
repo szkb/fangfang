@@ -12174,3 +12174,486 @@ Evaluator value:MPE is 0.9885863586358636
 Evaluator value:RMSE is 0.7838027387925198
 Evaluator value:MAE is 0.6056105192158445
 Result path is ../result/filmtrust/rating-trustsvd-output/trustsvd
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Job Setup completed.
+PMFRecommender iter 1: loss = 132715.38607900517, delta_loss = -132715.39
+PMFRecommender iter 2: loss = 77271.49274799757, delta_loss = 55443.895
+PMFRecommender iter 3: loss = 44940.56601715378, delta_loss = 32330.926
+PMFRecommender iter 4: loss = 37748.32029482824, delta_loss = 7192.2456
+PMFRecommender iter 5: loss = 33141.05623731034, delta_loss = 4607.264
+PMFRecommender iter 6: loss = 29717.82973670275, delta_loss = 3423.2266
+PMFRecommender iter 7: loss = 27084.177253337362, delta_loss = 2633.6526
+PMFRecommender iter 8: loss = 25031.347555171644, delta_loss = 2052.8296
+PMFRecommender iter 9: loss = 23412.447396050255, delta_loss = 1618.9001
+PMFRecommender iter 10: loss = 22115.608765222096, delta_loss = 1296.8386
+PMFRecommender iter 11: loss = 21060.885006112705, delta_loss = 1054.7238
+PMFRecommender iter 12: loss = 20192.03093120147, delta_loss = 868.85406
+PMFRecommender iter 13: loss = 19468.081727363508, delta_loss = 723.9492
+PMFRecommender iter 14: loss = 18858.411450078296, delta_loss = 609.6703
+PMFRecommender iter 15: loss = 18339.855123717694, delta_loss = 518.55634
+PMFRecommender iter 16: loss = 17894.72953151342, delta_loss = 445.12558
+PMFRecommender iter 17: loss = 17509.38175767232, delta_loss = 385.34778
+PMFRecommender iter 18: loss = 17173.135863648004, delta_loss = 336.24588
+PMFRecommender iter 19: loss = 16877.5439381594, delta_loss = 295.59192
+PMFRecommender iter 20: loss = 16615.857534057137, delta_loss = 261.6864
+PMFRecommender iter 21: loss = 16382.650685075952, delta_loss = 233.20685
+PMFRecommender iter 22: loss = 16173.543388884918, delta_loss = 209.1073
+PMFRecommender iter 23: loss = 15984.990490381882, delta_loss = 188.5529
+PMFRecommender iter 24: loss = 15814.113760279326, delta_loss = 170.87672
+PMFRecommender iter 25: loss = 15658.564449017611, delta_loss = 155.54932
+PMFRecommender iter 26: loss = 15516.409917208837, delta_loss = 142.15453
+PMFRecommender iter 27: loss = 15386.041453735947, delta_loss = 130.36847
+PMFRecommender iter 28: loss = 15266.101635037609, delta_loss = 119.93982
+PMFRecommender iter 29: loss = 15155.429340265046, delta_loss = 110.672295
+PMFRecommender iter 30: loss = 15053.019724733418, delta_loss = 102.409615
+PMFRecommender iter 31: loss = 14957.995827749579, delta_loss = 95.023895
+PMFRecommender iter 32: loss = 14869.588432696919, delta_loss = 88.407394
+PMFRecommender iter 33: loss = 14787.121286418149, delta_loss = 82.46715
+PMFRecommender iter 34: loss = 14709.999562838404, delta_loss = 77.12173
+PMFRecommender iter 35: loss = 14637.700238994195, delta_loss = 72.299324
+PMFRecommender iter 36: loss = 14569.763663304975, delta_loss = 67.93658
+PMFRecommender iter 37: loss = 14505.785986829887, delta_loss = 63.977676
+PMFRecommender iter 38: loss = 14445.412332739405, delta_loss = 60.373653
+PMFRecommender iter 39: loss = 14388.330660789794, delta_loss = 57.081673
+PMFRecommender iter 40: loss = 14334.26630025324, delta_loss = 54.06436
+PMFRecommender iter 41: loss = 14282.977115865548, delta_loss = 51.289185
+PMFRecommender iter 42: loss = 14234.249258253536, delta_loss = 48.72786
+PMFRecommender iter 43: loss = 14187.893441761918, delta_loss = 46.355816
+PMFRecommender iter 44: loss = 14143.741690388892, delta_loss = 44.151752
+PMFRecommender iter 45: loss = 14101.64449536419, delta_loss = 42.097195
+PMFRecommender iter 46: loss = 14061.46833364058, delta_loss = 40.176163
+PMFRecommender iter 47: loss = 14023.093503340297, delta_loss = 38.374832
+PMFRecommender iter 48: loss = 13986.41223878623, delta_loss = 36.681263
+PMFRecommender iter 49: loss = 13951.327073414212, delta_loss = 35.085167
+PMFRecommender iter 50: loss = 13917.749423400002, delta_loss = 33.57765
+PMFRecommender iter 51: loss = 13885.598368244655, delta_loss = 32.151054
+PMFRecommender iter 52: loss = 13854.799607022936, delta_loss = 30.798761
+PMFRecommender iter 53: loss = 13825.284570712845, delta_loss = 29.515036
+PMFRecommender iter 54: loss = 13796.989672245714, delta_loss = 28.294899
+PMFRecommender iter 55: loss = 13769.855676868066, delta_loss = 27.133995
+PMFRecommender iter 56: loss = 13743.827176267268, delta_loss = 26.028502
+PMFRecommender iter 57: loss = 13718.8521508907, delta_loss = 24.975025
+PMFRecommender iter 58: loss = 13694.881606025461, delta_loss = 23.970545
+PMFRecommender iter 59: loss = 13671.86926858133, delta_loss = 23.012337
+PMFRecommender iter 60: loss = 13649.771333098153, delta_loss = 22.097935
+PMFRecommender iter 61: loss = 13628.546247194568, delta_loss = 21.225086
+PMFRecommender iter 62: loss = 13608.154528418527, delta_loss = 20.391718
+PMFRecommender iter 63: loss = 13588.55860613412, delta_loss = 19.595922
+PMFRecommender iter 64: loss = 13569.722683554312, delta_loss = 18.835922
+PMFRecommender iter 65: loss = 13551.612616349259, delta_loss = 18.110067
+PMFRecommender iter 66: loss = 13534.195805227397, delta_loss = 17.416811
+PMFRecommender iter 67: loss = 13517.441100676584, delta_loss = 16.754705
+PMFRecommender iter 68: loss = 13501.318718540359, delta_loss = 16.122381
+PMFRecommender iter 69: loss = 13485.800165403758, delta_loss = 15.518553
+PMFRecommender iter 70: loss = 13470.858172928887, delta_loss = 14.941993
+Job Train completed.
+Job End.
+Evaluator value:MAE is 0.6949525486059063
+Evaluator value:MPE is 0.9788228822882288
+Evaluator value:MSE is 0.8911851519083006
+Evaluator value:RMSE is 0.9440260334907616
+Result path is ../result/filmtrust/rating-pmf-output/pmf
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Job Setup completed.
+PMFRecommender iter 1: loss = 132715.38607900517, delta_loss = -132715.39
+PMFRecommender iter 2: loss = 77271.49274799757, delta_loss = 55443.895
+PMFRecommender iter 3: loss = 44940.56601715378, delta_loss = 32330.926
+PMFRecommender iter 4: loss = 37748.32029482824, delta_loss = 7192.2456
+PMFRecommender iter 5: loss = 33141.05623731034, delta_loss = 4607.264
+PMFRecommender iter 6: loss = 29717.82973670275, delta_loss = 3423.2266
+PMFRecommender iter 7: loss = 27084.177253337362, delta_loss = 2633.6526
+PMFRecommender iter 8: loss = 25031.347555171644, delta_loss = 2052.8296
+PMFRecommender iter 9: loss = 23412.447396050255, delta_loss = 1618.9001
+PMFRecommender iter 10: loss = 22115.608765222096, delta_loss = 1296.8386
+PMFRecommender iter 11: loss = 21060.885006112705, delta_loss = 1054.7238
+PMFRecommender iter 12: loss = 20192.03093120147, delta_loss = 868.85406
+PMFRecommender iter 13: loss = 19468.081727363508, delta_loss = 723.9492
+PMFRecommender iter 14: loss = 18858.411450078296, delta_loss = 609.6703
+PMFRecommender iter 15: loss = 18339.855123717694, delta_loss = 518.55634
+PMFRecommender iter 16: loss = 17894.72953151342, delta_loss = 445.12558
+PMFRecommender iter 17: loss = 17509.38175767232, delta_loss = 385.34778
+PMFRecommender iter 18: loss = 17173.135863648004, delta_loss = 336.24588
+PMFRecommender iter 19: loss = 16877.5439381594, delta_loss = 295.59192
+PMFRecommender iter 20: loss = 16615.857534057137, delta_loss = 261.6864
+PMFRecommender iter 21: loss = 16382.650685075952, delta_loss = 233.20685
+PMFRecommender iter 22: loss = 16173.543388884918, delta_loss = 209.1073
+PMFRecommender iter 23: loss = 15984.990490381882, delta_loss = 188.5529
+PMFRecommender iter 24: loss = 15814.113760279326, delta_loss = 170.87672
+PMFRecommender iter 25: loss = 15658.564449017611, delta_loss = 155.54932
+PMFRecommender iter 26: loss = 15516.409917208837, delta_loss = 142.15453
+PMFRecommender iter 27: loss = 15386.041453735947, delta_loss = 130.36847
+PMFRecommender iter 28: loss = 15266.101635037609, delta_loss = 119.93982
+PMFRecommender iter 29: loss = 15155.429340265046, delta_loss = 110.672295
+PMFRecommender iter 30: loss = 15053.019724733418, delta_loss = 102.409615
+PMFRecommender iter 31: loss = 14957.995827749579, delta_loss = 95.023895
+PMFRecommender iter 32: loss = 14869.588432696919, delta_loss = 88.407394
+PMFRecommender iter 33: loss = 14787.121286418149, delta_loss = 82.46715
+PMFRecommender iter 34: loss = 14709.999562838404, delta_loss = 77.12173
+PMFRecommender iter 35: loss = 14637.700238994195, delta_loss = 72.299324
+PMFRecommender iter 36: loss = 14569.763663304975, delta_loss = 67.93658
+PMFRecommender iter 37: loss = 14505.785986829887, delta_loss = 63.977676
+PMFRecommender iter 38: loss = 14445.412332739405, delta_loss = 60.373653
+PMFRecommender iter 39: loss = 14388.330660789794, delta_loss = 57.081673
+PMFRecommender iter 40: loss = 14334.26630025324, delta_loss = 54.06436
+PMFRecommender iter 41: loss = 14282.977115865548, delta_loss = 51.289185
+PMFRecommender iter 42: loss = 14234.249258253536, delta_loss = 48.72786
+PMFRecommender iter 43: loss = 14187.893441761918, delta_loss = 46.355816
+PMFRecommender iter 44: loss = 14143.741690388892, delta_loss = 44.151752
+PMFRecommender iter 45: loss = 14101.64449536419, delta_loss = 42.097195
+PMFRecommender iter 46: loss = 14061.46833364058, delta_loss = 40.176163
+PMFRecommender iter 47: loss = 14023.093503340297, delta_loss = 38.374832
+PMFRecommender iter 48: loss = 13986.41223878623, delta_loss = 36.681263
+PMFRecommender iter 49: loss = 13951.327073414212, delta_loss = 35.085167
+PMFRecommender iter 50: loss = 13917.749423400002, delta_loss = 33.57765
+PMFRecommender iter 51: loss = 13885.598368244655, delta_loss = 32.151054
+PMFRecommender iter 52: loss = 13854.799607022936, delta_loss = 30.798761
+PMFRecommender iter 53: loss = 13825.284570712845, delta_loss = 29.515036
+PMFRecommender iter 54: loss = 13796.989672245714, delta_loss = 28.294899
+PMFRecommender iter 55: loss = 13769.855676868066, delta_loss = 27.133995
+PMFRecommender iter 56: loss = 13743.827176267268, delta_loss = 26.028502
+PMFRecommender iter 57: loss = 13718.8521508907, delta_loss = 24.975025
+PMFRecommender iter 58: loss = 13694.881606025461, delta_loss = 23.970545
+PMFRecommender iter 59: loss = 13671.86926858133, delta_loss = 23.012337
+PMFRecommender iter 60: loss = 13649.771333098153, delta_loss = 22.097935
+PMFRecommender iter 61: loss = 13628.546247194568, delta_loss = 21.225086
+PMFRecommender iter 62: loss = 13608.154528418527, delta_loss = 20.391718
+PMFRecommender iter 63: loss = 13588.55860613412, delta_loss = 19.595922
+PMFRecommender iter 64: loss = 13569.722683554312, delta_loss = 18.835922
+PMFRecommender iter 65: loss = 13551.612616349259, delta_loss = 18.110067
+PMFRecommender iter 66: loss = 13534.195805227397, delta_loss = 17.416811
+PMFRecommender iter 67: loss = 13517.441100676584, delta_loss = 16.754705
+PMFRecommender iter 68: loss = 13501.318718540359, delta_loss = 16.122381
+PMFRecommender iter 69: loss = 13485.800165403758, delta_loss = 15.518553
+PMFRecommender iter 70: loss = 13470.858172928887, delta_loss = 14.941993
+Job Train completed.
+Job End.
+Evaluator value:MAE is 0.6949525486059063
+Evaluator value:RMSE is 0.9440260334907616
+Evaluator value:MPE is 0.9788228822882288
+Evaluator value:MSE is 0.8911851519083006
+Result path is ../result/filmtrust/rating-pmf-output/pmf
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Dataset: ../data/Extended ../data/Epinions
+Dataset: ../data/ExtendedEpinions
+All dataset files [..\data\ExtendedEpinions\rating.txt]
+All dataset files size 716800000
+Now loading dataset file rating
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Transform data to Feature successfully!
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Transform data to Feature successfully!
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Transform data to Feature successfully!
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Transform data to Feature successfully!
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Dataset: ../data/ExtendedEpinions
+All dataset files [..\data\ExtendedEpinions\rating.txt]
+All dataset files size 716800000
+Now loading dataset file rating
+Dataset: ../data/ExtendedEpinions
+All dataset files [..\data\ExtendedEpinions\rating.txt]
+All dataset files size 716800000
+Now loading dataset file rating
+Dataset: ../data/filmtrust/rating
+All dataset files [..\data\filmtrust\rating\ratings_0.txt, ..\data\filmtrust\rating\ratings_1.txt, ..\data\filmtrust\rating\ratings_2.txt, ..\data\filmtrust\rating\ratings_3.txt]
+All dataset files size 411942
+Now loading dataset file ratings_0
+Now loading dataset file ratings_1
+Now loading dataset file ratings_2
+Now loading dataset file ratings_3
+Transform data to Convertor successfully!
+Split data to train Set and test Set successfully!
+Data size of training is 28408
+Data size of testing is 7272
+Transform data to Feature successfully!
+Job Setup completed.
+TrustSVDRecommender iter 1: loss = 26575.288783072356, delta_loss = -26575.29
+TrustSVDRecommender iter 2: loss = 18168.659359715588, delta_loss = 8406.63
+TrustSVDRecommender iter 3: loss = 15467.124519498175, delta_loss = 2701.535
+TrustSVDRecommender iter 4: loss = 14183.237371982546, delta_loss = 1283.8872
+TrustSVDRecommender iter 5: loss = 13450.513918591681, delta_loss = 732.72345
+TrustSVDRecommender iter 6: loss = 12984.208671232986, delta_loss = 466.30524
+TrustSVDRecommender iter 7: loss = 12665.13991213809, delta_loss = 319.06876
+TrustSVDRecommender iter 8: loss = 12434.993481827127, delta_loss = 230.14642
+TrustSVDRecommender iter 9: loss = 12261.921362019217, delta_loss = 173.07211
+TrustSVDRecommender iter 10: loss = 12127.263205027646, delta_loss = 134.65816
+TrustSVDRecommender iter 11: loss = 12019.380471422472, delta_loss = 107.88274
+TrustSVDRecommender iter 12: loss = 11930.783628110781, delta_loss = 88.59684
+TrustSVDRecommender iter 13: loss = 11856.418101261055, delta_loss = 74.365524
+TrustSVDRecommender iter 14: loss = 11792.840312246291, delta_loss = 63.57779
+TrustSVDRecommender iter 15: loss = 11737.592141515095, delta_loss = 55.24817
+TrustSVDRecommender iter 16: loss = 11688.928265519615, delta_loss = 48.663876
+TrustSVDRecommender iter 17: loss = 11645.544025758756, delta_loss = 43.38424
+TrustSVDRecommender iter 18: loss = 11606.48030750911, delta_loss = 39.063717
+TrustSVDRecommender iter 19: loss = 11570.990335609786, delta_loss = 35.48997
+TrustSVDRecommender iter 20: loss = 11538.507348212912, delta_loss = 32.482986
+TrustSVDRecommender iter 21: loss = 11508.573733284684, delta_loss = 29.933615
+TrustSVDRecommender iter 22: loss = 11480.831610467116, delta_loss = 27.742123
+TrustSVDRecommender iter 23: loss = 11454.98275430859, delta_loss = 25.848856
+TrustSVDRecommender iter 24: loss = 11430.787285891085, delta_loss = 24.195469
+TrustSVDRecommender iter 25: loss = 11408.039948901218, delta_loss = 22.747337
+TrustSVDRecommender iter 26: loss = 11386.571316368863, delta_loss = 21.468632
+TrustSVDRecommender iter 27: loss = 11366.233263608268, delta_loss = 20.338053
+TrustSVDRecommender iter 28: loss = 11346.900637324836, delta_loss = 19.332626
+TrustSVDRecommender iter 29: loss = 11328.462140397922, delta_loss = 18.438498
+TrustSVDRecommender iter 30: loss = 11310.821791027438, delta_loss = 17.640348
+TrustSVDRecommender iter 31: loss = 11293.893109842236, delta_loss = 16.92868
+TrustSVDRecommender iter 32: loss = 11277.600222346233, delta_loss = 16.292887
+TrustSVDRecommender iter 33: loss = 11261.874119019618, delta_loss = 15.726104
+TrustSVDRecommender iter 34: loss = 11246.653437189654, delta_loss = 15.220682
+TrustSVDRecommender iter 35: loss = 11231.882054370324, delta_loss = 14.771383
+TrustSVDRecommender iter 36: loss = 11217.509631248102, delta_loss = 14.372423
+TrustSVDRecommender iter 37: loss = 11203.490078495679, delta_loss = 14.019553
+TrustSVDRecommender iter 38: loss = 11189.781939711656, delta_loss = 13.708138
+TrustSVDRecommender iter 39: loss = 11176.347436257436, delta_loss = 13.434504
+TrustSVDRecommender iter 40: loss = 11163.152747103335, delta_loss = 13.194689
+TrustSVDRecommender iter 41: loss = 11150.16743451785, delta_loss = 12.985312
+TrustSVDRecommender iter 42: loss = 11137.36465239864, delta_loss = 12.802782
+TrustSVDRecommender iter 43: loss = 11124.720811435815, delta_loss = 12.643841
+TrustSVDRecommender iter 44: loss = 11112.215724057074, delta_loss = 12.505088
+TrustSVDRecommender iter 45: loss = 11099.832401438545, delta_loss = 12.383323
+TrustSVDRecommender iter 46: loss = 11087.557124103281, delta_loss = 12.275277
+TrustSVDRecommender iter 47: loss = 11075.379283352799, delta_loss = 12.177841
+TrustSVDRecommender iter 48: loss = 11063.291357653949, delta_loss = 12.087926
+TrustSVDRecommender iter 49: loss = 11051.288730210737, delta_loss = 12.002627
+TrustSVDRecommender iter 50: loss = 11039.369551142367, delta_loss = 11.919179
+TrustSVDRecommender iter 51: loss = 11027.534488415167, delta_loss = 11.835063
+TrustSVDRecommender iter 52: loss = 11015.786469864635, delta_loss = 11.748018
+TrustSVDRecommender iter 53: loss = 11004.13035476588, delta_loss = 11.656116
+TrustSVDRecommender iter 54: loss = 10992.572574196203, delta_loss = 11.55778
+TrustSVDRecommender iter 55: loss = 10981.12074336919, delta_loss = 11.451831
+TrustSVDRecommender iter 56: loss = 10969.783246609342, delta_loss = 11.337497
+TrustSVDRecommender iter 57: loss = 10958.568838619294, delta_loss = 11.214408
+TrustSVDRecommender iter 58: loss = 10947.486237569743, delta_loss = 11.082601
+TrustSVDRecommender iter 59: loss = 10936.543776758937, delta_loss = 10.942461
+TrustSVDRecommender iter 60: loss = 10925.749070915077, delta_loss = 10.794705
+TrustSVDRecommender iter 61: loss = 10915.108772151256, delta_loss = 10.640299
+TrustSVDRecommender iter 62: loss = 10904.628355822297, delta_loss = 10.480416
+TrustSVDRecommender iter 63: loss = 10894.312011236905, delta_loss = 10.316344
+TrustSVDRecommender iter 64: loss = 10884.162561936842, delta_loss = 10.149449
+TrustSVDRecommender iter 65: loss = 10874.181489154767, delta_loss = 9.981072
+TrustSVDRecommender iter 66: loss = 10864.368970255879, delta_loss = 9.812519
+TrustSVDRecommender iter 67: loss = 10854.72400492724, delta_loss = 9.644965
+TrustSVDRecommender iter 68: loss = 10845.244533816749, delta_loss = 9.479471
+TrustSVDRecommender iter 69: loss = 10835.927622557087, delta_loss = 9.316912
+TrustSVDRecommender iter 70: loss = 10826.769615766327, delta_loss = 9.158007
+TrustSVDRecommender iter 71: loss = 10817.76633439512, delta_loss = 9.003282
+TrustSVDRecommender iter 72: loss = 10808.913225398775, delta_loss = 8.853109
+TrustSVDRecommender iter 73: loss = 10800.205539409237, delta_loss = 8.707686
+TrustSVDRecommender iter 74: loss = 10791.638449713637, delta_loss = 8.56709
+TrustSVDRecommender iter 75: loss = 10783.207191236012, delta_loss = 8.431258
+TrustSVDRecommender iter 76: loss = 10774.907137344233, delta_loss = 8.300054
+TrustSVDRecommender iter 77: loss = 10766.73389551425, delta_loss = 8.173242
+TrustSVDRecommender iter 78: loss = 10758.683341371649, delta_loss = 8.050554
+TrustSVDRecommender iter 79: loss = 10750.751674976318, delta_loss = 7.9316664
+TrustSVDRecommender iter 80: loss = 10742.935419560921, delta_loss = 7.8162556
+TrustSVDRecommender iter 81: loss = 10735.231447276434, delta_loss = 7.7039723
+TrustSVDRecommender iter 82: loss = 10727.63695227272, delta_loss = 7.594495
+TrustSVDRecommender iter 83: loss = 10720.149456669069, delta_loss = 7.4874954
+TrustSVDRecommender iter 84: loss = 10712.766767734192, delta_loss = 7.382689
+TrustSVDRecommender iter 85: loss = 10705.48697274058, delta_loss = 7.279795
+TrustSVDRecommender iter 86: loss = 10698.30838926307, delta_loss = 7.1785836
+TrustSVDRecommender iter 87: loss = 10691.229556145161, delta_loss = 7.078833
+TrustSVDRecommender iter 88: loss = 10684.249182791884, delta_loss = 6.9803734
+TrustSVDRecommender iter 89: loss = 10677.366141249859, delta_loss = 6.8830414
+TrustSVDRecommender iter 90: loss = 10670.579418786088, delta_loss = 6.7867227
+TrustSVDRecommender iter 91: loss = 10663.888113698891, delta_loss = 6.691305
+TrustSVDRecommender iter 92: loss = 10657.291393051799, delta_loss = 6.5967207
+TrustSVDRecommender iter 93: loss = 10650.788494576835, delta_loss = 6.5028987
+TrustSVDRecommender iter 94: loss = 10644.37868867149, delta_loss = 6.409806
+TrustSVDRecommender iter 95: loss = 10638.061287242359, delta_loss = 6.3174014
+TrustSVDRecommender iter 96: loss = 10631.83561026487, delta_loss = 6.225677
+TrustSVDRecommender iter 97: loss = 10625.70099998201, delta_loss = 6.13461
+TrustSVDRecommender iter 98: loss = 10619.656791118006, delta_loss = 6.044209
+TrustSVDRecommender iter 99: loss = 10613.702329517217, delta_loss = 5.9544616
+TrustSVDRecommender iter 100: loss = 10607.836945856561, delta_loss = 5.8653836
+TrustSVDRecommender iter 101: loss = 10602.059975776889, delta_loss = 5.77697
+TrustSVDRecommender iter 102: loss = 10596.370736831876, delta_loss = 5.689239
+TrustSVDRecommender iter 103: loss = 10590.768550100149, delta_loss = 5.6021867
+TrustSVDRecommender iter 104: loss = 10585.252717168518, delta_loss = 5.515833
+TrustSVDRecommender iter 105: loss = 10579.822543872004, delta_loss = 5.4301734
+TrustSVDRecommender iter 106: loss = 10574.477316619956, delta_loss = 5.3452272
+TrustSVDRecommender iter 107: loss = 10569.216327036109, delta_loss = 5.2609897
+TrustSVDRecommender iter 108: loss = 10564.038847306645, delta_loss = 5.1774797
+TrustSVDRecommender iter 109: loss = 10558.944155342473, delta_loss = 5.0946918
+TrustSVDRecommender iter 110: loss = 10553.931509336311, delta_loss = 5.012646
+TrustSVDRecommender iter 111: loss = 10549.000172587574, delta_loss = 4.931337
+TrustSVDRecommender iter 112: loss = 10544.1493878887, delta_loss = 4.850785
+TrustSVDRecommender iter 113: loss = 10539.378401856118, delta_loss = 4.770986
+TrustSVDRecommender iter 114: loss = 10534.686438457731, delta_loss = 4.691963
+TrustSVDRecommender iter 115: loss = 10530.072724370732, delta_loss = 4.613714
+TrustSVDRecommender iter 116: loss = 10525.536460608015, delta_loss = 4.536264
+TrustSVDRecommender iter 117: loss = 10521.076849499921, delta_loss = 4.459611
+TrustSVDRecommender iter 118: loss = 10516.693065104031, delta_loss = 4.3837843
+TrustSVDRecommender iter 119: loss = 10512.384281167604, delta_loss = 4.308784
+TrustSVDRecommender iter 120: loss = 10508.149640977485, delta_loss = 4.23464
+TrustSVDRecommender iter 121: loss = 10503.98828608033, delta_loss = 4.161355
+TrustSVDRecommender iter 122: loss = 10499.899326123388, delta_loss = 4.08896
+TrustSVDRecommender iter 123: loss = 10495.881868487344, delta_loss = 4.0174575
+TrustSVDRecommender iter 124: loss = 10491.934988031115, delta_loss = 3.9468803
+TrustSVDRecommender iter 125: loss = 10488.057757570732, delta_loss = 3.8772304
+TrustSVDRecommender iter 126: loss = 10484.249217379822, delta_loss = 3.80854
+TrustSVDRecommender iter 127: loss = 10480.508407325513, delta_loss = 3.7408102
+TrustSVDRecommender iter 128: loss = 10476.834335297192, delta_loss = 3.674072
+TrustSVDRecommender iter 129: loss = 10473.22601115888, delta_loss = 3.608324
+TrustSVDRecommender iter 130: loss = 10469.682414660787, delta_loss = 3.5435965
+TrustSVDRecommender iter 131: loss = 10466.202530370658, delta_loss = 3.4798844
+TrustSVDRecommender iter 132: loss = 10462.785314834206, delta_loss = 3.4172156
+TrustSVDRecommender iter 133: loss = 10459.429733253208, delta_loss = 3.3555815
+TrustSVDRecommender iter 134: loss = 10456.134725450862, delta_loss = 3.2950077
+TrustSVDRecommender iter 135: loss = 10452.899243770933, delta_loss = 3.2354817
+TrustSVDRecommender iter 136: loss = 10449.72221805809, delta_loss = 3.1770258
+TrustSVDRecommender iter 137: loss = 10446.602594803167, delta_loss = 3.1196232
+TrustSVDRecommender iter 138: loss = 10443.539300886365, delta_loss = 3.063294
+TrustSVDRecommender iter 139: loss = 10440.531284179762, delta_loss = 3.0080168
+TrustSVDRecommender iter 140: loss = 10437.577475213064, delta_loss = 2.953809
+TrustSVDRecommender iter 141: loss = 10434.676829680964, delta_loss = 2.9006455
+TrustSVDRecommender iter 142: loss = 10431.828288673916, delta_loss = 2.848541
+TrustSVDRecommender iter 143: loss = 10429.030821602804, delta_loss = 2.797467
+TrustSVDRecommender iter 144: loss = 10426.28338569738, delta_loss = 2.7474358
+TrustSVDRecommender iter 145: loss = 10423.584969756394, delta_loss = 2.698416
+TrustSVDRecommender iter 146: loss = 10420.93455202251, delta_loss = 2.6504178
+TrustSVDRecommender iter 147: loss = 10418.331145148391, delta_loss = 2.603407
+TrustSVDRecommender iter 148: loss = 10415.773752439185, delta_loss = 2.5573926
+TrustSVDRecommender iter 149: loss = 10413.261414513532, delta_loss = 2.512338
+TrustSVDRecommender iter 150: loss = 10410.793162930753, delta_loss = 2.4682515
+TrustSVDRecommender iter 151: loss = 10408.368068740188, delta_loss = 2.4250941
+TrustSVDRecommender iter 152: loss = 10405.98519461011, delta_loss = 2.382874
+TrustSVDRecommender iter 153: loss = 10403.64364435243, delta_loss = 2.3415504
+TrustSVDRecommender iter 154: loss = 10401.342513177722, delta_loss = 2.3011312
+TrustSVDRecommender iter 155: loss = 10399.080939053176, delta_loss = 2.261574
+TrustSVDRecommender iter 156: loss = 10396.858051006977, delta_loss = 2.222888
+TrustSVDRecommender iter 157: loss = 10394.67302210346, delta_loss = 2.1850288
+TrustSVDRecommender iter 158: loss = 10392.525015641686, delta_loss = 2.1480064
+TrustSVDRecommender iter 159: loss = 10390.413240115067, delta_loss = 2.1117756
+TrustSVDRecommender iter 160: loss = 10388.33689327226, delta_loss = 2.0763469
+TrustSVDRecommender iter 161: loss = 10386.29521890129, delta_loss = 2.0416744
+TrustSVDRecommender iter 162: loss = 10384.287448986239, delta_loss = 2.0077698
+TrustSVDRecommender iter 163: loss = 10382.312862199371, delta_loss = 1.9745868
+TrustSVDRecommender iter 164: loss = 10380.370724269575, delta_loss = 1.942138
+TrustSVDRecommender iter 165: loss = 10378.460348172994, delta_loss = 1.9103761
+TrustSVDRecommender iter 166: loss = 10376.581032443313, delta_loss = 1.8793157
+TrustSVDRecommender iter 167: loss = 10374.73212356442, delta_loss = 1.8489089
+TrustSVDRecommender iter 168: loss = 10372.912952025586, delta_loss = 1.8191715
+TrustSVDRecommender iter 169: loss = 10371.122897005052, delta_loss = 1.790055
+TrustSVDRecommender iter 170: loss = 10369.36131962481, delta_loss = 1.7615774
+TrustSVDRecommender iter 171: loss = 10367.627630618796, delta_loss = 1.733689
+TrustSVDRecommender iter 172: loss = 10365.921220946126, delta_loss = 1.7064097
+TrustSVDRecommender iter 173: loss = 10364.241531770987, delta_loss = 1.6796892
+TrustSVDRecommender iter 174: loss = 10362.587982429422, delta_loss = 1.6535493
+TrustSVDRecommender iter 175: loss = 10360.960043318353, delta_loss = 1.6279391
+TrustSVDRecommender iter 176: loss = 10359.357161265432, delta_loss = 1.602882
+TrustSVDRecommender iter 177: loss = 10357.778834729443, delta_loss = 1.5783266
+TrustSVDRecommender iter 178: loss = 10356.224536539255, delta_loss = 1.5542982
+TrustSVDRecommender iter 179: loss = 10354.693792108956, delta_loss = 1.5307444
+TrustSVDRecommender iter 180: loss = 10353.18609908505, delta_loss = 1.507693
+Job Train completed.
+Job End.
+Evaluator value:MSE is 0.6143467333386551
+Evaluator value:MPE is 0.9885863586358636
+Evaluator value:RMSE is 0.7838027387925198
+Evaluator value:MAE is 0.6056105192158445
+Result path is ../result/filmtrust/rating-trustsvd-output/trustsvd

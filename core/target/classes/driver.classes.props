@@ -7,6 +7,8 @@ jdbc=net.librec.data.model.JDBCDataModel
 arff=net.librec.data.model.ArffDataModel
 #DataAppender(-appender)
 social=net.librec.data.convertor.appender.SocialDataAppender
+mysocial=net.librec.data.convertor.appender.SocialDataAppender11
+
 document=net.librec.data.convertor.appender.DocumentDataAppender
 #DataSplitter(-splitter)
 ratio=net.librec.data.splitter.RatioDataSplitter
@@ -87,6 +89,8 @@ soreg=net.librec.recommender.context.rating.SoRegRecommender
 timesvd=net.librec.recommender.context.rating.TimeSVDRecommender
 trustmf=net.librec.recommender.context.rating.TrustMFRecommender
 trustsvd=net.librec.recommender.context.rating.TrustSVDRecommender
+
+mytrustsvd=net.librec.recommender.context.rating.MyTrustSVDRecommender
 associationrule=net.librec.recommender.ext.AssociationRuleRecommender
 external=net.librec.recommender.ext.ExternalRecommender
 hybrid=net.librec.recommender.hybrid.HybridRecommender
