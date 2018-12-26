@@ -53,6 +53,8 @@ public class SocialDataAppender extends Configured implements DataAppender {
      */
     private SparseMatrix userSocialMatrix;
 
+    private SparseMatrix transUserSocialMatrix;
+
     private SparseMatrix userSocialMatrixCopy;
 
     private SparseMatrix userImpSocialMatrix;
@@ -125,6 +127,10 @@ public class SocialDataAppender extends Configured implements DataAppender {
         // Map {col-id, multiple row-id}: used to fast build a rating matrix
         Multimap<Integer, Integer> colMap2 = HashMultimap.create();
         // BiMap {raw id, inner id} userIds, itemIds
+
+        Table<Integer, Integer, Double> dataTable3 = HashBasedTable.create();
+        // Map {col-id, multiple row-id}: used to fast build a rating matrix
+        Multimap<Integer, Integer> colMap3 = HashMultimap.create();
         final List<File> files = new ArrayList<File>();
         final ArrayList<Long> fileSizeList = new ArrayList<Long>();
         SimpleFileVisitor<Path> finder = new SimpleFileVisitor<Path>() {
@@ -169,6 +175,8 @@ public class SocialDataAppender extends Configured implements DataAppender {
                         colMap.put(col, row);
                         dataTable1.put(row, col, rate);
                         colMap1.put(col, row);
+                        dataTable3.put(col, row, rate);
+                        colMap3.put(row, col);
                     }
                 }
                 if (!isComplete) {
@@ -234,8 +242,8 @@ public class SocialDataAppender extends Configured implements DataAppender {
                     if (countNumber >= 2) {
                         h2++;
                         // TODO 这里需要改回来
-                        dataTable1.put(i1, k, 0.667);
-                        colMap1.put(k, i1);
+//                        dataTable1.put(i1, k, 0.667);
+//                        colMap1.put(k, i1);
 //                        dataTable2.put(i1, k, 0.7);
 //                        colMap2.put(k, i1);
                     }
@@ -261,7 +269,7 @@ public class SocialDataAppender extends Configured implements DataAppender {
 //                global[i] = (Math.log10(hash[i]) - Math.log10(MMin)) / dd;
                 global[i] = (trustee - (MMin)) / (MMax - MMin) * Math.log10(1508 / trustee);
                 global[i] = Math.log(trustee / MMin) / Math.log(MMax / MMin);
-                System.out.println(i + " " + trustee + " " + global[i]);
+//                System.out.println(i + " " + trustee + " " + global[i]);
 //                System.out.println(global[i]);
 
             }
@@ -349,10 +357,9 @@ public class SocialDataAppender extends Configured implements DataAppender {
                 if ((p1[sA][sB] > 0 || p2[sA][sB] > 0) && !userSocialMatrixCopy.contains(sA, sB)) {
                     double answer = p1[sA][sB] * 0.667 + p2[sA][sB] * 0.333;
                     double prefix = prefixp1[sA][sB] + prefixp2[sA][sB];
-                    if (prefix > 0 && global[sB] > 0) {
+                    if (prefix > 0) {
                         double localTrust = answer / prefix * 1.0;
-                        double temp = globalWeight * global[sB] + (1 - globalWeight) * localTrust;
-                        dataTable2.put(sA, sB, temp);
+                        dataTable2.put(sA, sB, localTrust);
                         colMap2.put(sB, sA);
                     }
                 }
@@ -395,6 +402,8 @@ public class SocialDataAppender extends Configured implements DataAppender {
             }
         }
         userImpSocialMatrix = new SparseMatrix(numRows, numCols, dataTable2, colMap2);
+        transUserSocialMatrix = new SparseMatrix(numRows, numCols, dataTable3, colMap3);
+
         // release memory of data table
         dataTable = null;
         dataTable2 = null;
@@ -411,6 +420,10 @@ public class SocialDataAppender extends Configured implements DataAppender {
 
     public SparseMatrix getImpUserAppender() {
         return userImpSocialMatrix;
+    }
+
+    public SparseMatrix getTransPositionUserAppender() {
+        return transUserSocialMatrix;
     }
 
     /**

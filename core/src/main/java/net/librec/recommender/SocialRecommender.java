@@ -66,20 +66,21 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
         regSocial = conf.getFloat("rec.social.regularization", 0.01f);
         // social path for the socialMatrix
         socialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getUserAppender();
-        impSocialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getImpUserAppender();
-//        impSocialMatrix = new SparseMatrix(socialMatrix);
-
-//        Table<Integer, Integer, Double> dataTableImpSocialMatrix = HashBasedTable.create();
-//        dataTableImpSocialMatrix = impSocialMatrix.getDataTable();
+        impSocialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getTransPositionUserAppender();
+//        impSocialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getImpUserAppender();
+////        impSocialMatrix = new SparseMatrix(socialMatrix);
 //
-        for (int userIdx = 0; userIdx < numUsers; userIdx++) {
-            for (int userIdj = 0; userIdj < numUsers; userIdj++) {
-                if (impSocialMatrix.contains(userIdx, userIdj) && impSocialMatrix.get(userIdx, userIdj) > 0) {
-                    impSocialMatrix.set(userIdx, userIdj, socialWeight * impSocialMatrix.get(userIdx, userIdj)
-                            + (1 - socialWeight) * similarity(userIdx, userIdj));
-                }
-            }
-        }
+////        Table<Integer, Integer, Double> dataTableImpSocialMatrix = HashBasedTable.create();
+////        dataTableImpSocialMatrix = impSocialMatrix.getDataTable();
+////
+//        for (int userIdx = 0; userIdx < numUsers; userIdx++) {
+//            for (int userIdj = 0; userIdj < numUsers; userIdj++) {
+//                if (impSocialMatrix.contains(userIdx, userIdj) && impSocialMatrix.get(userIdx, userIdj) > 0) {
+//                    impSocialMatrix.set(userIdx, userIdj, socialWeight * impSocialMatrix.get(userIdx, userIdj)
+//                            + (1 - socialWeight) * similarity(userIdx, userIdj));
+//                }
+//            }
+//        }
 ////                    dataTableImpSocialMatrix.put(userIdx, userIdj, impSocialWeight * impSocialMatrix.get(userIdx, userIdj)
 ////                            + (1 - impSocialWeight) * similarity(userIdx, userIdj));
 //                }
