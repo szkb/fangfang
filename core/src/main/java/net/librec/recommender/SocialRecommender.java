@@ -18,6 +18,8 @@
 package net.librec.recommender;
 
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 import net.librec.common.LibrecException;
 import net.librec.data.convertor.appender.SocialDataAppender;
@@ -43,6 +45,8 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
 
     protected SparseMatrix impSocialMatrix;
 
+    protected SparseMatrix diSimilarityMatrix;
+
     /**
      * social regularization
      */
@@ -66,7 +70,9 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
         regSocial = conf.getFloat("rec.social.regularization", 0.01f);
         // social path for the socialMatrix
         socialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getUserAppender();
-        impSocialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getTransPositionUserAppender();
+//        diSimilarityMatrix = socialMatrix;
+        searchDisimilarityList();
+//        impSocialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getTransPositionUserAppender();
 //        impSocialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getImpUserAppender();
 ////        impSocialMatrix = new SparseMatrix(socialMatrix);
 //
@@ -101,6 +107,8 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
             createUserSimilarityList();
         }
         List<Map.Entry<Integer, Double>> nns = new ArrayList<>();
+
+        Lists.sortList(userSimilarityList[userIdx]);
         List<Map.Entry<Integer, Double>> simList = userSimilarityList[userIdx];
 
         int count = 0;
@@ -153,6 +161,86 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
             sim = temp.getValue() * countCommon / s.size();
         }
         return sim;
+    }
+
+    public Map<Integer, List<Map.Entry<Integer, Double>>> similarityList = new HashMap<>();
+
+    public void searchDisimilarityList() {
+        Table<Integer, Integer, Double> dataTable = HashBasedTable.create();
+        Multimap<Integer, Integer> colMap = HashMultimap.create();
+
+        Table<Integer, Integer, Double> dataTable2 = HashBasedTable.create();
+        Multimap<Integer, Integer> colMap2 = HashMultimap.create();
+        knn = conf.getInt("rec.neighbors.knn.number");
+        similarityMatrix = context.getSimilarity().getSimilarityMatrix();
+        if (!(null != userSimilarityList && userSimilarityList.length > 0)) {
+            createUserSimilarityList();
+        }
+
+        // 相似
+        for (int userIdx = 0; userIdx < numUsers; userIdx++) {
+            int count = 0;
+
+            // 排序可能有问题
+            List<Map.Entry<Integer, Double>> simList = userSimilarityList[userIdx];
+            List<Map.Entry<Integer, Double>> nns = new ArrayList<>();
+
+            for (Map.Entry<Integer, Double> userRatingEntry : simList) {
+                int similarUserIdx = userRatingEntry.getKey();
+//            if (!userSet.contains(similarUserIdx)) {
+//                continue;
+//            }
+                double sim = userRatingEntry.getValue();
+                if (sim > 0) {
+                    nns.add(userRatingEntry);
+                    dataTable2.put(userIdx, similarUserIdx, sim);
+                    colMap2.put(similarUserIdx, userIdx);
+                    count++;
+                }
+                if (count == knn) {
+//                    similarityList.put(userIdx, nns);
+                    break;
+                }
+            }
+
+
+        }
+
+
+        // 不相似
+        for (int userIdx = 0; userIdx < numUsers; userIdx++) {
+            int count = 0;
+
+            // 排序可能有问题
+            Lists.sortList(userSimilarityList[userIdx]);
+            List<Map.Entry<Integer, Double>> simList = userSimilarityList[userIdx];
+            List<Map.Entry<Integer, Double>> nns = new ArrayList<>();
+
+            for (Map.Entry<Integer, Double> userRatingEntry : simList) {
+                int similarUserIdx = userRatingEntry.getKey();
+//            if (!userSet.contains(similarUserIdx)) {
+//                continue;
+//            }
+                double sim = userRatingEntry.getValue();
+                if (sim > 0) {
+                    nns.add(userRatingEntry);
+                    dataTable.put(userIdx, similarUserIdx, sim);
+                    colMap.put(similarUserIdx, userIdx);
+                    count++;
+                }
+                if (count == knn) {
+//                    similarityList.put(userIdx, nns);
+                    break;
+                }
+            }
+
+
+        }
+
+
+        diSimilarityMatrix = new SparseMatrix(numUsers, numUsers, dataTable, colMap);
+        impSocialMatrix = new SparseMatrix(numUsers, numUsers, dataTable2, colMap2);
+
     }
 
     public void createUserSimilarityList() {

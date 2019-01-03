@@ -113,8 +113,8 @@ public class SocialDataAppender extends Configured implements DataAppender {
      */
     private void readData(String inputDataPath) throws IOException {
 
-        double[] global = new double[1508];
-        int[] hash = new int[1508];//保存每个用户被信任的次数
+//        double[] global = new double[1508];
+//        int[] hash = new int[1508];//保存每个用户被信任的次数
         // Table {row-id, col-id, rate}
         Table<Integer, Integer, Double> dataTable = HashBasedTable.create();
         // Map {col-id, multiple row-id}: used to fast build a rating matrix
@@ -170,11 +170,11 @@ public class SocialDataAppender extends Configured implements DataAppender {
                     if (userIds.containsKey(userA) && userIds.containsKey(userB)) {
                         int row = userIds.get(userA);
                         int col = userIds.get(userB);
-                        hash[col]++;
+//                        hash[col]++;
                         dataTable.put(row, col, rate);
                         colMap.put(col, row);
-                        dataTable1.put(row, col, rate);
-                        colMap1.put(col, row);
+//                        dataTable1.put(row, col, rate);
+//                        colMap1.put(col, row);
                         dataTable3.put(col, row, rate);
                         colMap3.put(row, col);
                     }
@@ -188,11 +188,11 @@ public class SocialDataAppender extends Configured implements DataAppender {
             fis.close();
         }
         int numRows = userIds.size(), numCols = userIds.size();
-        Arrays.sort(hash);
-        int MMax = -1;
-        int MMin = 2000;
-        double MIMI = -1.0;
-        double NINI = 2000.0;
+//        Arrays.sort(hash);
+//        int MMax = -1;
+//        int MMin = 2000;
+//        double MIMI = -1.0;
+//        double NINI = 2000.0;
 //        for (int i = hash.length - 1; i >= 0; i--) {
 //            if (hash[i] > 0) {
 //                if (hash[i] > MMax) MMax = hash[i];
@@ -201,7 +201,7 @@ public class SocialDataAppender extends Configured implements DataAppender {
 //        }
 //        double dd = Math.log10(MMax) - Math.log10(MMin);
 //        double dd = 39 - MMin;
-        int countHash = 0;
+//        int countHash = 0;
 //        for (int i = 0; i < 1508; i++) {
 //            if (hash[i] > 0) {
 //                countHash++;
@@ -215,65 +215,65 @@ public class SocialDataAppender extends Configured implements DataAppender {
         // build rating matrix
         userSocialMatrix = new SparseMatrix(numRows, numCols, dataTable, colMap);
 
-        int h1 = 0;
-        int h2 = 0;
-        for (int i1 = 0; i1 < 1508; i1++) {
-            for (int k = 0; k < 1508; k++) {
-                if (i1 != k && !userSocialMatrix.contains(i1, k)) {
-                    int countNumber = 0;
-                    for (int t = 0; t < 1508; t++) {
-                        if (i1 != k && k != t && i1 != t && userSocialMatrix.contains(i1, t) && userSocialMatrix.contains(t, k)
-                                && userSocialMatrix.get(i1, t) > 0 && userSocialMatrix.get(t, k) > 0) {
-                            if (userSocialMatrix.get(i1, t) > 0 && userSocialMatrix.get(t, k) > 0) {
-                                countNumber++;
-                            }
+//        int h1 = 0;
+//        int h2 = 0;
+//        for (int i1 = 0; i1 < 1508; i1++) {
+//            for (int k = 0; k < 1508; k++) {
+//                if (i1 != k && !userSocialMatrix.contains(i1, k)) {
+//                    int countNumber = 0;
+//                    for (int t = 0; t < 1508; t++) {
+//                        if (i1 != k && k != t && i1 != t && userSocialMatrix.contains(i1, t) && userSocialMatrix.contains(t, k)
+//                                && userSocialMatrix.get(i1, t) > 0 && userSocialMatrix.get(t, k) > 0) {
+//                            if (userSocialMatrix.get(i1, t) > 0 && userSocialMatrix.get(t, k) > 0) {
+//                                countNumber++;
+//                            }
+////
+////                            dataTable1.put(i, k, 0.7);
+////                            colMap1.put(k, i);
+////
+////                            break;
+//                        }
+//                    }
+//                    if (countNumber == 1) {
+//                        h1++;
+////                        dataTable1.put(i, k, 0.7);
+////                        colMap1.put(k, i);
+//                    }
+//                    if (countNumber >= 2) {
+//                        h2++;
+//                        // TODO 这里需要改回来
+////                        dataTable1.put(i1, k, 0.667);
+////                        colMap1.put(k, i1);
+////                        dataTable2.put(i1, k, 0.7);
+////                        colMap2.put(k, i1);
+//                    }
+//                }
+//            }
 //
-//                            dataTable1.put(i, k, 0.7);
-//                            colMap1.put(k, i);
+//        }
+
+//        userSocialMatrixCopy = new SparseMatrix(numRows, numCols, dataTable1, colMap1);
+
+//        for (int i = 0; i < 1508; i++) {
+//            int trustee = userSocialMatrixCopy.columnSize(i);
 //
-//                            break;
-                        }
-                    }
-                    if (countNumber == 1) {
-                        h1++;
-//                        dataTable1.put(i, k, 0.7);
-//                        colMap1.put(k, i);
-                    }
-                    if (countNumber >= 2) {
-                        h2++;
-                        // TODO 这里需要改回来
-//                        dataTable1.put(i1, k, 0.667);
-//                        colMap1.put(k, i1);
-//                        dataTable2.put(i1, k, 0.7);
-//                        colMap2.put(k, i1);
-                    }
-                }
-            }
-
-        }
-
-        userSocialMatrixCopy = new SparseMatrix(numRows, numCols, dataTable1, colMap1);
-
-        for (int i = 0; i < 1508; i++) {
-            int trustee = userSocialMatrixCopy.columnSize(i);
-
-            if (trustee > 0) {
-                if (trustee > MMax) MMax = trustee;
-                if (trustee < MMin) MMin = trustee;
-            }
-        }
-        for (int i = 0; i < 1508; i++) {
-            int trustee = userSocialMatrixCopy.columnSize(i);
-            if (trustee > 0) {
-                countHash++;
-//                global[i] = (Math.log10(hash[i]) - Math.log10(MMin)) / dd;
-                global[i] = (trustee - (MMin)) / (MMax - MMin) * Math.log10(1508 / trustee);
-                global[i] = Math.log(trustee / MMin) / Math.log(MMax / MMin);
-//                System.out.println(i + " " + trustee + " " + global[i]);
-//                System.out.println(global[i]);
-
-            }
-        }
+//            if (trustee > 0) {
+//                if (trustee > MMax) MMax = trustee;
+//                if (trustee < MMin) MMin = trustee;
+//            }
+//        }
+//        for (int i = 0; i < 1508; i++) {
+//            int trustee = userSocialMatrixCopy.columnSize(i);
+//            if (trustee > 0) {
+//                countHash++;
+////                global[i] = (Math.log10(hash[i]) - Math.log10(MMin)) / dd;
+//                global[i] = (trustee - (MMin)) / (MMax - MMin) * Math.log10(1508 / trustee);
+//                global[i] = Math.log(trustee / MMin) / Math.log(MMax / MMin);
+////                System.out.println(i + " " + trustee + " " + global[i]);
+////                System.out.println(global[i]);
+//
+//            }
+//        }
 
         double[][] p1 = new double[1508][1508];
         double[][] prefixp1 = new double[1508][1508];
@@ -329,18 +329,18 @@ public class SocialDataAppender extends Configured implements DataAppender {
 
         for (int i2 = 0; i2 < 1508; i2++) {
             for (int k = 0; k < 1508; k++) {
-                if (i2 != k && userSocialMatrixCopy.contains(i2, k) && userSocialMatrixCopy.get(i2, k) > 0) {
+                if (i2 != k && userSocialMatrix.contains(i2, k) && userSocialMatrix.get(i2, k) > 0) {
                     for (int k1 = 0; k1 < 1508; k1++) {
-                        if (k1 != k && k1 != i2 && userSocialMatrixCopy.contains(k, k1)
-                                && userSocialMatrixCopy.get(k, k1) > 0) {
-                            prefixp1[i2][k1] += userSocialMatrixCopy.get(i2, k);
-                            p1[i2][k1] += userSocialMatrixCopy.get(i2, k) * userSocialMatrixCopy.get(k, k1);
+                        if (k1 != k && k1 != i2 && userSocialMatrix.contains(k, k1)
+                                && userSocialMatrix.get(k, k1) > 0) {
+                            prefixp1[i2][k1] += userSocialMatrix.get(i2, k);
+                            p1[i2][k1] += userSocialMatrix.get(i2, k) * userSocialMatrix.get(k, k1);
                             for (int k2 = 0; k2 < 1508; k2++) {
                                 if (k2 != k1 && k2 != k && k2 != i2 &&
-                                        userSocialMatrixCopy.contains(k1, k2) && userSocialMatrixCopy.get(k1, k2) > 0) {
-                                    prefixp2[i2][k2] += userSocialMatrixCopy.get(i2, k) * userSocialMatrixCopy.get(k, k1);
-                                    p2[i2][k2] += userSocialMatrixCopy.get(i2, k) * userSocialMatrixCopy.get(k, k1)
-                                            * userSocialMatrixCopy.get(k1, k2);
+                                        userSocialMatrix.contains(k1, k2) && userSocialMatrix.get(k1, k2) > 0) {
+                                    prefixp2[i2][k2] += userSocialMatrix.get(i2, k) * userSocialMatrix.get(k, k1);
+                                    p2[i2][k2] += userSocialMatrix.get(i2, k) * userSocialMatrix.get(k, k1)
+                                            * userSocialMatrix.get(k1, k2);
                                 }
                             }
                         }
@@ -354,7 +354,7 @@ public class SocialDataAppender extends Configured implements DataAppender {
         double globalWeight = 1.0; // 这里是1的确是正确的，但是不合理；
         for (int sA = 0; sA < 1508; sA++) {
             for (int sB = 0; sB < 1508; sB++) {
-                if ((p1[sA][sB] > 0 || p2[sA][sB] > 0) && !userSocialMatrixCopy.contains(sA, sB)) {
+                if ((p1[sA][sB] > 0 || p2[sA][sB] > 0) && !userSocialMatrix.contains(sA, sB)) {
                     double answer = p1[sA][sB] * 0.667 + p2[sA][sB] * 0.333;
                     double prefix = prefixp1[sA][sB] + prefixp2[sA][sB];
                     if (prefix > 0) {
@@ -406,7 +406,9 @@ public class SocialDataAppender extends Configured implements DataAppender {
 
         // release memory of data table
         dataTable = null;
+        dataTable1 = null;
         dataTable2 = null;
+        dataTable3 = null;
     }
 
     /**
