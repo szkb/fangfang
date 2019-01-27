@@ -55,7 +55,7 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
      */
     private DenseVector userBiases, itemBiases;
 
-//    private DenseVector trustBiases, trusteeBiases;
+    private DenseVector trustBiases, trusteeBiases;
 
     /**
      * bias regularization
@@ -92,13 +92,13 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
         //initialize userBiases and itemBiases
         userBiases = new DenseVector(numUsers);
         itemBiases = new DenseVector(numItems);
-//        trustBiases = new DenseVector(numUsers);
-//        trusteeBiases = new DenseVector(numUsers);
+        trustBiases = new DenseVector(numUsers);
+        trusteeBiases = new DenseVector(numUsers);
 
         userBiases.init(initMean, initStd);
         itemBiases.init(initMean, initStd);
-//        trustBiases.init(initMean, initStd);
-//        trusteeBiases.init(initMean, initStd);
+        trustBiases.init(initMean, initStd);
+        trusteeBiases.init(initMean, initStd);
 
 
         //initialize trusteeFactors and impItemFactors
@@ -158,7 +158,7 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
      */
     @Override
     protected void trainModel() throws LibrecException {
-        for (int iter = 1; iter <= 200; iter++) {
+        for (int iter = 1; iter <=200; iter++) {
 
             loss = 0.0d;
 
@@ -307,6 +307,8 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
                         double trusteeFactorValue = trusteeFactors.get(trusteeIdx, factorIdx);
                         double trusteeWeightValue = trusteeWeights.get(trusteeIdx);
 
+//                        double trusterWeightValue = trusterWeights.get(trusteeIdx);
+
                         // TODO 这里的 deltaTrustee 应该还差个值吧 trusteeWeightValue这里有问题
                         // trusteeWeightValue 这个应该是TV的值
                         // v is the set of users who trust user v
@@ -345,7 +347,7 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
-                double predtictSocialValue = 0;
+                double predtictSocialValue = trustBiases.get(userIdx) + trusteeBiases.get(userIdx);
                 if (decoTrusteesSimilarityList.size() > 0) {
                     double sumTemp = 0.0;
                     for (int trustee : decoTrusteesSimilarityList) {
@@ -357,7 +359,7 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
                 }
 
                 // TODO 这里分解真的合理吗？
-//                double predtictSocialValue = trustBiases.get(userIdx) + DenseMatrix.rowMult(userFactors, userIdx, trusteeFactors, trusteeIdx);
+//                predtictSocialValue = trustBiases.get(userIdx) + DenseMatrix.rowMult(userFactors, userIdx, trusteeFactors, trusteeIdx);
                 double socialError = predtictSocialValue - socialValue;
 
 
@@ -366,14 +368,14 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
                 double deriValue = regSocial * socialError;
 
                 double trusterWeightValue = trusterWeights.get(userIdx);
-//                double sgd = socialError + regBias * trusterWeights.get(userIdx) * trustBiases.get(userIdx);
-//                trustBiases.add(userIdx, -learnRate * sgd);
-//
-//                double sgd2 = socialError + regBias * trusteeWeights.get(userIdx) * trusteeBiases.get(userIdx);
-//                trusteeBiases.add(userIdx, -learnRate * sgd2);
-//
-//                loss += regBias * trusterWeights.get(userIdx) * trustBiases.get(userIdx) * trustBiases.get(userIdx);
-//                         + regBias * trusteeWeights.get(userIdx) * trusteeBiases.get(userIdx) * trusteeBiases.get(userIdx);
+                double sgd = socialError + regBias * trusterWeights.get(userIdx) * trustBiases.get(userIdx);
+                trustBiases.add(userIdx, -learnRate * sgd);
+
+                double sgd2 = socialError + regBias * trusteeWeights.get(userIdx) * trusteeBiases.get(userIdx);
+                trusteeBiases.add(userIdx, -learnRate * sgd2);
+
+                loss += regBias * trusterWeights.get(userIdx) * trustBiases.get(userIdx) * trustBiases.get(userIdx)
+                         + regBias * trusteeWeights.get(userIdx) * trusteeBiases.get(userIdx) * trusteeBiases.get(userIdx);
 
                 double[] sumDecoTrustFactors = new double[numFactors];
                 for (int factorIdx = 0; factorIdx < numFactors; factorIdx++) {
@@ -389,7 +391,8 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
 
                     // TODO 这里都是用梯度下降法来求对应的值
                     // TODO tempUserFactors 指的就是pu，trusteeTempFactors 指的就是wv trusterWeightValue 表示|Tu|
-                    tempUserFactors.add(userIdx, factorIdx, deriValue * trusteeFactorValue + regSocial * trusterWeightValue * userFactorValue);
+                    tempUserFactors.add(userIdx, factorIdx, deriValue * trusteeFactorValue + regSocial * trusterWeightValue * userFactorValue
+                        + regSocial * trusterWeightValue * userFactorValue);
                     trusteeTempFactors.add(trusteeIdx, factorIdx, deriValue * (userFactorValue + sumDecoTrustFactors[factorIdx]));
 
                     for (int decoTrustIdx : decoTrusteesSimilarityList) {
@@ -405,7 +408,8 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
 
                     }
 
-                    loss += regSocial * trusterWeightValue * userFactorValue * userFactorValue;
+                    loss += regSocial * trusterWeightValue * userFactorValue * userFactorValue
+                            + regSocial * trusterWeightValue * userFactorValue * userFactorValue;
                 }
             }
 
@@ -525,7 +529,6 @@ public class TrustSVDFriendRecommender extends SocialRecommender {
 
         return predictRating;
     }
-
 
 
 }
