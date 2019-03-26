@@ -241,7 +241,7 @@ public class TextDataConvertor extends AbstractDataConvertor {
                     String[] data = line.trim().split("[ \t,]+");
                     String user = data[0];
                     String item = data[1];
-                    Double rate = ((dataColumnFormat.equals("UIR") || dataColumnFormat.equals("UIRT")) && data.length >= 3) ? Double.valueOf(data[2]) : 1.0;
+                    Double rate = ((dataColumnFormat.equals("UIR") || dataColumnFormat.equals("UIRT")) && data.length >= 3) ? Double.valueOf(data[4]) : 1.0;
 
                     // binarize the rating for item recommendation task
                     if (binThold >= 0) {

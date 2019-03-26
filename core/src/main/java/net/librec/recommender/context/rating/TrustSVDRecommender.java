@@ -175,7 +175,7 @@ public class TrustSVDRecommender extends SocialRecommender {
      */
     @Override
     protected void trainModel() throws LibrecException {
-        for (int iter = 1; iter <= 180; iter++) {
+        for (int iter = 1; iter <= 200; iter++) {
 
             loss = 0.0d;
 
@@ -218,12 +218,20 @@ public class TrustSVDRecommender extends SocialRecommender {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+
                 if (trusteesList.size() > 0) {
                     double sum = 0.0;
+                    int count = 0;
                     for (int trusteeIdx : trusteesList)
-                        sum += DenseMatrix.rowMult(trusteeFactors, trusteeIdx, itemFactors, itemIdx);
+                        if (socialMatrix.contains(trusteeIdx, itemIdx) && socialMatrix.get(trusteeIdx, itemIdx) > 0) {
+                            count++;
+                            sum += DenseMatrix.rowMult(trusteeFactors, trusteeIdx, itemFactors, itemIdx);
+                        }
 
-                    predictRating += explicitTrustWeight * sum / Math.sqrt(trusteesList.size());
+                    if (count > 0) {
+                        predictRating += explicitTrustWeight * sum / Math.sqrt(count);
+//                        predictRating += explicitTrustWeight * sum / Math.sqrt(trusteesList.size());
+                    }
                 }
 
                 // the user-specific influence of users (trustees)trusted by user userIdx
@@ -505,7 +513,6 @@ public class TrustSVDRecommender extends SocialRecommender {
 
         return predictRating;
     }
-
 
 
 }

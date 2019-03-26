@@ -43,6 +43,8 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
      */
     protected SparseMatrix socialMatrix;
 
+    protected SparseMatrix tranSocialMatrix;
+
     protected SparseMatrix impSocialMatrix;
 
     protected SparseMatrix diSimilarityMatrix;
@@ -52,7 +54,8 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
      */
     protected float regSocial;
 
-    protected float regImpSocial = 0.6f;
+    protected float regImpSocial = 1.0f;
+//    protected float regImpSocial = 1.0f;
 
     protected float impSocialWeight = 0.8f;
 
@@ -70,6 +73,8 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
         regSocial = conf.getFloat("rec.social.regularization", 0.01f);
         // social path for the socialMatrix
         socialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getUserAppender();
+
+//        tranSocialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getTransPositionUserAppender();
 //        diSimilarityMatrix = socialMatrix;
         searchDisimilarityList();
 //        impSocialMatrix = ((SocialDataAppender) getDataModel().getDataAppender()).getTransPositionUserAppender();
@@ -191,16 +196,21 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
 //                continue;
 //            }
                 double sim = userRatingEntry.getValue();
-                if (sim > 0) {
-                    nns.add(userRatingEntry);
-                    dataTable2.put(userIdx, similarUserIdx, sim);
-                    colMap2.put(similarUserIdx, userIdx);
-                    count++;
-                }
+//                if (sim > 0) {
+//                    nns.add(userRatingEntry);
+//                    dataTable2.put(userIdx, similarUserIdx, sim);
+//                    colMap2.put(similarUserIdx, userIdx);
+//                    count++;
+//                }
+                nns.add(userRatingEntry);
+                dataTable2.put(userIdx, similarUserIdx, sim);
+                colMap2.put(similarUserIdx, userIdx);
                 if (count == knn) {
 //                    similarityList.put(userIdx, nns);
                     break;
                 }
+                count++;
+
             }
 
 
@@ -222,16 +232,20 @@ public abstract class SocialRecommender extends MatrixFactorizationRecommender {
 //                continue;
 //            }
                 double sim = userRatingEntry.getValue();
-                if (sim > 0) {
-                    nns.add(userRatingEntry);
-                    dataTable.put(userIdx, similarUserIdx, sim);
-                    colMap.put(similarUserIdx, userIdx);
-                    count++;
-                }
+//                if (sim > 0) {
+//                    nns.add(userRatingEntry);
+//                    dataTable.put(userIdx, similarUserIdx, sim);
+//                    colMap.put(similarUserIdx, userIdx);
+//                    count++;
+//                }
+                nns.add(userRatingEntry);
+                dataTable.put(userIdx, similarUserIdx, sim);
+                colMap.put(similarUserIdx, userIdx);
                 if (count == knn) {
 //                    similarityList.put(userIdx, nns);
                     break;
                 }
+                count++;
             }
 
 

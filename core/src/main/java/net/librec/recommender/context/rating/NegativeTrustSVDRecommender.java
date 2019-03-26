@@ -36,7 +36,7 @@ import java.util.concurrent.ExecutionException;
  */
 @ModelData({"isRating", "trustsvd", "userFactors", "itemFactors", "impItemFactors", "userBiases", "itemBiases", "socialMatrix", "trainMatrix", "impSocialMatrix"})
 public class NegativeTrustSVDRecommender extends SocialRecommender {
-    private Double explicitTrustWeight = 0.0;
+    private Double explicitTrustWeight = 0.8;
     /**
      * impItemFactors denotes the implicit influence of items rated by user u in the past on the ratings of unknown items in the future.
      */
@@ -175,7 +175,7 @@ public class NegativeTrustSVDRecommender extends SocialRecommender {
      */
     @Override
     protected void trainModel() throws LibrecException {
-        for (int iter = 1; iter <= 180; iter++) {
+        for (int iter = 1; iter <= 200; iter++) {
 
             loss = 0.0d;
 
@@ -223,7 +223,7 @@ public class NegativeTrustSVDRecommender extends SocialRecommender {
                     for (int trusteeIdx : trusteesList)
                         sum += DenseMatrix.rowMult(trusteeFactors, trusteeIdx, itemFactors, itemIdx);
 
-                    predictRating += sum / Math.sqrt(trusteesList.size());
+                    predictRating += explicitTrustWeight * sum / Math.sqrt(trusteesList.size());
                 }
 
                 // the user-specific influence of users (trustees)trusted by user userIdx
@@ -298,7 +298,7 @@ public class NegativeTrustSVDRecommender extends SocialRecommender {
 
                     double deltaUser = error * itemFactorValue + regUser * userWeight * userFactorValue;
                     double deltaItem = error * (userFactorValue + sumImpItemsFactors[factorIdx]
-                            + sumTrusteesFactors[factorIdx]
+                            + explicitTrustWeight * sumTrusteesFactors[factorIdx]
                             + (explicitTrustWeight - 1) * sumImpTrusteesFactors[factorIdx])
                             + regItem * itemWeight * itemFactorValue;
 
@@ -327,7 +327,7 @@ public class NegativeTrustSVDRecommender extends SocialRecommender {
                         // TODO 这里的 deltaTrustee 应该还差个值吧 trusteeWeightValue这里有问题
                         // trusteeWeightValue 这个应该是TV的值
                         // v is the set of users who trust user v
-                        double deltaTrustee = error * itemFactorValue / trusteeWeightDenom
+                        double deltaTrustee = explicitTrustWeight * error * itemFactorValue / trusteeWeightDenom
                                 + regUser * trusteeWeightValue * trusteeFactorValue;
                         trusteeTempFactors.add(trusteeIdx, factorIdx, deltaTrustee);
 
@@ -400,9 +400,9 @@ public class NegativeTrustSVDRecommender extends SocialRecommender {
                 double predtictImpSocialValue = DenseMatrix.rowMult(userFactors, userIdx, impTrusteeFactors, impTrusteeIdx);
                 double impSocialError = predtictImpSocialValue - impSocialValue;
 
-                loss += regImpSocial * impSocialError * impSocialError;
+                loss += 0.9 * impSocialError * impSocialError;
 
-                double deriValue = regImpSocial * impSocialError;
+                double deriValue = 0.9 * impSocialError;
 
                 // 这里还要改？？？
                 double impTrusterWeightValue = impTrusterWeights.get(userIdx);
@@ -416,10 +416,10 @@ public class NegativeTrustSVDRecommender extends SocialRecommender {
                     // TODO 这里都是用梯度下降法来求对应的值
                     // TODO tempUserFactors 指的就是pu，trusteeTempFactors 指的就是wv
                     tempUserFactors.add(userIdx, factorIdx, deriValue * impTrusteeFactorValue
-                            + regImpSocial * impTrusterWeightValue * userFactorValue);
+                            + 0.9 * impTrusterWeightValue * userFactorValue);
                     impTrusteeTempFactors.add(impTrusteeIdx, factorIdx, deriValue * userFactorValue);
 
-                    loss += regImpSocial * impTrusterWeightValue * userFactorValue * userFactorValue;
+                    loss += 0.9 * impTrusterWeightValue * userFactorValue * userFactorValue;
                 }
             }
 
@@ -478,7 +478,7 @@ public class NegativeTrustSVDRecommender extends SocialRecommender {
                 //完全和前面的类似，可以理解为信任自己的用户对自己评分可能产生的影响
                 sum += DenseMatrix.rowMult(trusteeFactors, trusteeIdx, itemFactors, itemIdx);
 
-            predictRating += sum / Math.sqrt(trusteeList.size());
+            predictRating += explicitTrustWeight * sum / Math.sqrt(trusteeList.size());
         }
 
         // the user-specific influence of users (trustees)trusted by user userIdx

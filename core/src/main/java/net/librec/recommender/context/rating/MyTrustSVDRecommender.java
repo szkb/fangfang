@@ -197,6 +197,7 @@ public class MyTrustSVDRecommender extends SocialRecommender {
      */
     @Override
     protected void trainModel() throws LibrecException {
+        // todo 迭代次数200
         for (int iter = 1; iter <= 200; iter++) {
 
             loss = 0.0d;

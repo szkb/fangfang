@@ -19,7 +19,6 @@ import java.util.concurrent.ExecutionException;
 @ModelData({"isRating", "trustsvd", "userFactors", "itemFactors", "impItemFactors", "userBiases", "itemBiases", "socialMatrix", "trainMatrix"})
 public class TrustFriendRecommender extends SocialRecommender {
 
-    double trustweight = 0.3;
     /**
      * impItemFactors denotes the implicit influence of items rated by user u in the past on the ratings of unknown items in the future.
      */
@@ -69,8 +68,6 @@ public class TrustFriendRecommender extends SocialRecommender {
     protected LoadingCache<Integer, List<Integer>> userItemsCache, userTrusteeCache;
 
     protected LoadingCache<Integer, List<Integer>> userSimilarityCache;
-
-    protected LoadingCache<Integer, List<Integer>> tranUserTrusteeCache;
 
 
     /**
@@ -154,7 +151,6 @@ public class TrustFriendRecommender extends SocialRecommender {
         userItemsCache = trainMatrix.rowColumnsCache(cacheSpec);
         userTrusteeCache = socialMatrix.rowColumnsCache(cacheSpec);
         userSimilarityCache = socialMatrix.rowColumnsCache(cacheSpec);
-        tranUserTrusteeCache = tranSocialMatrix.rowColumnsCache(cacheSpec);
 //        globalTrustMean = socialMatrix.mean();
     }
 
@@ -315,26 +311,10 @@ public class TrustFriendRecommender extends SocialRecommender {
                         sumTemp += DenseMatrix.rowMult(deTrusterFactors, trustee, trusteeFactors, trusteeIdx);
                     }
                     // todo 加上信任误差或者被信任误差
-                    predtictSocialValue += trustweight * sumTemp / Math.sqrt(trusteesSimilarityList.size())
+                    predtictSocialValue += sumTemp / Math.sqrt(trusteesSimilarityList.size())
                             + DenseMatrix.rowMult(userFactors, userIdx, trusteeFactors, trusteeIdx);
                 }
 
-                List<Integer> trustees = null;
-                try {
-                    trustees = tranUserTrusteeCache.get(userIdx);
-//                trustees = tranSocialMatrix.row(userIdx).getIndexList();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-                if (trustees.size() > 0) {
-                    double sumTemp = 0.0;
-                    for (int trustee : trustees) {
-                        sumTemp += DenseMatrix.rowMult(deTrusteeFactors, trustee, trusteeFactors, trusteeIdx);
-                    }
-                    // todo 加上信任误差或者被信任误差
-                    predtictSocialValue += (1 - trustweight) * sumTemp / Math.sqrt(trustees.size());
-                }
 
                 double socialError = predtictSocialValue - socialValue;
 
@@ -343,7 +323,6 @@ public class TrustFriendRecommender extends SocialRecommender {
                 double deriValue = regSocial * socialError;
 
                 double trusterWeightValue = trusterWeights.get(userIdx);
-                double trusteeWeightValue = trusteeWeights.get(userIdx);
 
                 double sgd = socialError + regBias * trusterWeights.get(userIdx) * trustBiases.get(userIdx);
                 trustBiases.add(userIdx, -learnRate * sgd);
@@ -365,25 +344,15 @@ public class TrustFriendRecommender extends SocialRecommender {
                     sumImpTrustFactors[factorIdx] = Math.sqrt(trusteesSimilarityList.size()) > 0 ? sum / Math.sqrt(trusteesSimilarityList.size()) : sum;
                 }
 
-                double[] sumDeTrusteeFactors = new double[numFactors];
-                for (int factorIdx = 0; factorIdx < numFactors; factorIdx++) {
-                    double sum = 0;
-                    for (int deTrusteeIdx : trustees)
-                        sum += deTrusteeFactors.get(deTrusteeIdx, factorIdx);
-
-                    sumDeTrusteeFactors[factorIdx] = Math.sqrt(trustees.size()) > 0 ? sum / Math.sqrt(trustees.size()) : sum;
-                }
 
                 for (int factorIdx = 0; factorIdx < numFactors; factorIdx++) {
                     double userFactorValue = userFactors.get(userIdx, factorIdx);
                     double trusteeFactorValue = trusteeFactors.get(trusteeIdx, factorIdx);
 
                     // todo user的系数要不要加上惩罚，另外，对系数的研究还不够，需要研究，regImSocial
-                    tempUserFactors.add(userIdx, factorIdx, deriValue * trusteeFactorValue + regSocial * trusterWeightValue * userFactorValue
-                            + 10 * trusterWeightValue * userFactorValue + + 10 * trusteeWeightValue * userFactorValue);
+                    tempUserFactors.add(userIdx, factorIdx, deriValue * trusteeFactorValue + regSocial * trusterWeightValue * userFactorValue);
                     trusteeTempFactors.add(trusteeIdx, factorIdx, deriValue * (userFactorValue
-                            + trustweight * sumImpTrustFactors[factorIdx]
-                            + (1 - trustweight) * sumDeTrusteeFactors[factorIdx]));
+                            + sumImpTrustFactors[factorIdx]));
 
                     for (int imptrustIdx : trusteesSimilarityList) {
                         double impTrustFactorValue = deTrusterFactors.get(imptrustIdx, factorIdx);
@@ -397,23 +366,9 @@ public class TrustFriendRecommender extends SocialRecommender {
                         loss += regItem * impTrustWeightValue * impTrustFactorValue * impTrustFactorValue;
 
                     }
-                    for (int deTrusteeIdx : trustees) {
-                        double deTrusteeFactorValue = deTrusteeFactors.get(deTrusteeIdx, factorIdx);
-
-                        double impTrustWeightValue = impTrusterWeights.get(deTrusteeIdx);
-
-                        // todo
-                        double deltaImpTrust = socialError * (1 - trustweight) * trusteeFactorValue / Math.sqrt(trustees.size()) + regItem * impTrustWeightValue * deTrusteeFactorValue;
-                        deTrusteeFactors.add(deTrusteeIdx, factorIdx, -learnRate * deltaImpTrust);
-
-                        loss += regItem * impTrustWeightValue * deTrusteeFactorValue * deTrusteeFactorValue;
-
-                    }
 
                     // todo 改了一个loss
-                    loss += regSocial * trusterWeightValue * userFactorValue * userFactorValue
-                            + 10 * trusterWeightValue * userFactorValue * userFactorValue
-                            + 10 * trusteeWeightValue * userFactorValue * userFactorValue;
+                    loss += regSocial * trusterWeightValue * userFactorValue * userFactorValue;
                 }
             }
 

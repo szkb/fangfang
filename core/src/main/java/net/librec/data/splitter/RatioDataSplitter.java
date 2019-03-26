@@ -39,10 +39,14 @@ import java.util.List;
  */
 public class RatioDataSplitter extends AbstractDataSplitter {
 
-    /** The rate dataset for splitting */
+    /**
+     * The rate dataset for splitting
+     */
     private SparseMatrix preferenceMatrix;
 
-    /** The datetime dataset for splitting */
+    /**
+     * The datetime dataset for splitting
+     */
     private SparseMatrix datetimeMatrix;
 
     /**
@@ -55,10 +59,8 @@ public class RatioDataSplitter extends AbstractDataSplitter {
      * Initializes a newly created {@code RatioDataSplitter} object
      * with convertor and configuration.
      *
-     * @param dataConvertor
-     *          the convertor for the splitter.
-     * @param conf
-     *          the configuration for the splitter.
+     * @param dataConvertor the convertor for the splitter.
+     * @param conf          the configuration for the splitter.
      */
     public RatioDataSplitter(DataConvertor dataConvertor, Configuration conf) {
         this.dataConvertor = dataConvertor;
@@ -131,16 +133,22 @@ public class RatioDataSplitter extends AbstractDataSplitter {
             testMatrix = new SparseMatrix(preferenceMatrix);
             trainMatrix = new SparseMatrix(preferenceMatrix);
 
-            for(MatrixEntry matrixEntry: preferenceMatrix){
+            for (MatrixEntry matrixEntry : preferenceMatrix) {
                 int userIdx = matrixEntry.row();
                 int itemIdx = matrixEntry.column();
 
                 double rdm = Randoms.uniform();
+//                if (preferenceMatrix.rowSize(userIdx) > 2) {
+//                    testMatrix.set(userIdx, itemIdx, 0.0);
+//                }
+//                if (preferenceMatrix.rowSize(userIdx) <= 2) {
+//                    trainMatrix.set(userIdx, itemIdx, 0.0);
+//                }
 
                 if (rdm < ratio) {
-                    if(preferenceMatrix.rowSize(userIdx) >2){
+//                    if (preferenceMatrix.rowSize(userIdx) > 2) {
                         testMatrix.set(userIdx, itemIdx, 0.0);
-                    }
+//                    }
                 } else {
                     trainMatrix.set(userIdx, itemIdx, 0.0);
                 }
@@ -191,7 +199,7 @@ public class RatioDataSplitter extends AbstractDataSplitter {
      * ratings where {@code ratio} percentage of ratings are preserved for each
      * user, and the rest are used as the testing data.
      *
-     * @param ratio  the ratio of training data
+     * @param ratio the ratio of training data
      */
     public void getRatioByUser(double ratio) {
 
@@ -225,7 +233,7 @@ public class RatioDataSplitter extends AbstractDataSplitter {
      * {@code ratio} are preserved for each user as training data with the rest
      * as test.
      *
-     *  @param ratio  the ratio of training data
+     * @param ratio the ratio of training data
      */
     public void getFixedRatioByUser(double ratio) {
 
@@ -305,7 +313,7 @@ public class RatioDataSplitter extends AbstractDataSplitter {
      * ratings where {@code ratio} percentage of ratings are preserved for each
      * item, and the rest are used as the testing data.
      *
-     * @param ratio  the ratio of training data
+     * @param ratio the ratio of training data
      */
     public void getRatioByItem(double ratio) {
 
